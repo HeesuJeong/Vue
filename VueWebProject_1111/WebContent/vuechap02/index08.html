@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SSAFY</title>
+  <style type="text/css">
+  #first div {color: blue ;}
+  </style>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+<div id='first'>
+  <svg width="200" height="100">
+     <my-svg ccx="50" ccy="50" cr="40"></my-svg>
+     <my-svg ccx="150" ccy="50" cr="20"></my-svg>
+     
+  </svg>
+</div>
+
+<script type="text/javascript">
+/* first뷰에 컴포넌트를 만드는데~  template으로 통신한다 */
+  var first = new Vue({
+      el : '#first',
+      components:{
+          'my-svg': {  /* 커스텀 컴포넌트 만들 수 있다~! */
+        	  props: ['ccx','ccy','cr'],
+        	  template: '<circle :cx="ccx" :cy="ccy" :r="cr" stroke="green" stroke-width="4" fill="yellow" />'
+          }
+       }
+   });
+  Vue.config.devtools = true;
+</script>
+</body>
+</html>

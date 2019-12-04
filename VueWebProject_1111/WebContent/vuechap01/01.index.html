@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+  <h2>aaaa</h2>
+  <div id="app">
+  {{message}} <!-- data항목에서 찾는다! -->
+  </div>
+  
+  <div id="app2">
+  {{msg}}
+  </div>
+  
+  <!-- div읽혀지기 전에 script실행되면 app못 찾아서 나오지 않는다!
+  script를 밑으로!! 아니면 window.onload... 요런식으로~ -->
+  <script>
+    new Vue({
+      el:"#app", /* 뷰객체가 어떤 dom tree를 건드리는지? */
+      data:{message:"Hello Vue"}
+    });
+    
+    new Vue({
+        el:"#app2", /* 뷰객체가 가리키고 있는 마크업이 무엇인지 id로 찍은것! */
+        data:{msg:"Hello SSAFY"}
+      });
+    
+  </script>
+</body>
+</html>

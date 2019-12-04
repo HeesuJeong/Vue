@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>axios</title>
+  <style>
+    body {background-color: #ffffff;}
+    #second  > h2 { margin:auto; padding:0px; text-align:center; color: blue;}	
+    .red {color: red;}
+    #tid {border: 1px; border-color: blue; border-collapse: collapse; margin:auto;text-align:center;}
+  </style>
+  <script src="https://unpkg.com/vue"></script>
+  <!-- 엑시오스 사용하는 자바스크립트 라이브러리 선언하기 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+</head>
+<body>
+  <div id='second'>
+   <h2>SSAFY SAFE FOOD</h2>
+  </div>
+<div id="app">
+  <section v-if="errored"> <!-- 에러발생시 -->
+    <p>Error In AJAX Transport </p>
+  </section>
+  <section v-else> <!-- 에러발생안하면 -->
+    <div v-if="loading">Loading...</div>
+	<table id='tid' style='border: 1px'>
+	<tr><td>분류</td><td>이름</td><td>이미지</td></tr>
+    <div v-else>
+    <tr  v-for="food in info"><td v-html="food.productGb"></td>
+    <td v-html="food.prdlstNm"><td> 
+    <img v-bind:src="food.imgurl1"/></td></tr>
+    </div>
+</table>
+  </section>
+</div>				
+  <script type="text/javascript">
+  app=new Vue({
+	  el: '#app',
+  						/* 여태 데이터에 객체를 넣었는데 이제는 함수도 넣을 수 잇다! */
+	  data:function() {			// data:function()    => data(){ }     restful같은 동적 데이타 처리 할 때 
+	    return {
+	      info: null,
+	      loading: true,
+	      errored: false
+	    } /* 객체를 리턴한다 */
+	  },
+	  mounted () {
+	    axios
+	      .get('./food.json') /* json파일 가져올거야. 파일 경로적으면 돼 */
+	      			/* 람다표현방식(함수로 바꿀줄 알아야해) function(response){this.info~})
+  						json파일을 info로 넘긴다*/
+  						/* 여기서 this는 엑시오스를 가리킨다 =>app으로 명시해줭ㅑ해 
+  						람다는 알아서 엑시오스가 아니라 info를 가지는 뷰를 찾아서 객체를 알아서 꽂아줘*/
+	    /*   .then(response => (this.info = response.data)) */
+	      .then(function(response){ app.info = response.data})
+	      .catch(error => {
+	        console.log(error)
+	        this.errored = true
+	      })
+	      .finally(() => this.loading = false)
+	  }
+	})
+  </script>
+</body>
+</html>

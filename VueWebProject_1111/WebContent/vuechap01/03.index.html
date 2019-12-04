@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+
+	<h2>aaaa</h2>
+
+	<div id="app">
+	<div>{{message}}</div>
+	<div>{{print()}}</div>
+	<div>{{print2(' 띠용 ')}}</div>
+	<div v-on:click="changemethod">{{changemsg}}</div> <!-- 클릭하면 changemethod함수 부르겟슴다! -->
+	</div>
+
+
+
+	<script>  /* comma잊지 말기!!*** */
+		new Vue({
+			el : "#app", 
+			data : { /* json문법 따른다 */
+				message : "<h1>Hello Vue</h1>",
+				msg:"조미료",
+				changemsg:"before"
+			},
+		methods:{ /* 함수 정의 */
+			/* 뷰 안의 데이터 접근하고 싶으면 this사용 */
+			changemethod:function(){
+			/* this.changemsg="after"; */
+			/* 해당 함수 실행해도 DOM은 바뀌지 않고 데이터만 바뀌는거야 */
+				this.$data.changemsg="after"; /* 뷰 안의 data안의 changemsg에 접근하겟다 */
+			},
+			print:function(){
+			return "Hello Vue";
+			},
+			print2:function(data){
+				return data+" ssafy";
+			}				
+		}
+		});
+	</script>
+</body>
+</html>

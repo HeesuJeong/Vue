@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+
+	<h2>aaaa</h2>
+
+	<div id="app">  <!-- 아우터 마크업에 뷰를 준다 -->
+		<div>{{message}}</div>
+		<!-- 중괄호 두개 대신 속성으로 값 줄 수 잇다!
+  뷰에서 속성은 v-붙여야해! -->
+		<div v-text="message"></div>
+		<div v-html="message"></div> <!-- 마크업 먹게 하고 싶으면 v-html -->
+		<div>{{msg}}</div>
+	</div>
+
+
+	<!-- div읽혀지기 전에 script실행되면 app못 찾아서 나오지 않는다!
+  script를 밑으로!! 아니면 window.onload... 요런식으로~ -->
+
+	<script>
+		new Vue({
+			el : "#app", /*메시지 안에 마크업 넣겟다=>중괄호 2개 안에 넣으면 뭐든 text로 인식되어 makeup 적용되지 않는다*/
+			data : { /* json문법 따른다 */
+				message : "<h1>Hello Vue</h1>",
+				msg:"조미료"
+			}
+		});
+	</script>
+</body>
+</html>
